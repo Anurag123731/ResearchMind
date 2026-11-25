@@ -1,205 +1,167 @@
-🧠 ResearchMind – Multi-Agent AI Research Assistant
+
+# 🧠 ResearchMind – Multi-Agent AI Research Assistant
 
 ResearchMind is an AI-powered research assistant that automates web research and generates structured reports on user-provided topics using a multi-agent architecture.
 
-Instead of relying on a single LLM response, ResearchMind divides the research workflow into specialized AI agents and chains for searching, reading, writing, and evaluating information.
+Instead of relying on a single LLM response, ResearchMind divides the research workflow into specialized agents and chains for searching, reading, writing, and evaluating information.
 
-🚀 Features
+## 🚀 Features
 
-AI-Powered Web Search: Uses Tavily API to retrieve relevant and up-to-date web search results.
+- **AI-Powered Web Search:** Uses Tavily API to retrieve relevant and up-to-date web search results.
+- **Multi-Agent Architecture:** Uses LangChain agents to search the web and extract useful information from webpages.
+- **Web Scraping:** Extracts relevant webpage content using Requests and BeautifulSoup.
+- **Automated Report Generation:** Uses an LLM and LCEL chain to generate structured research reports.
+- **AI-Based Evaluation:** A critic chain evaluates the generated report and provides a score, strengths, and areas for improvement.
+- **Interactive UI:** Built with Streamlit for an easy-to-use research experience.
+- **Download Reports:** Allows users to download generated research reports.
 
-Intelligent Web Scraping: Extracts meaningful webpage content using Requests and BeautifulSoup.
+## 🏗️ System Architecture
 
-Multi-Agent Architecture: Uses specialized Search and Reader agents to automate research tasks.
+ResearchMind consists of two AI agents and two LLM chains connected through a sequential research pipeline.
 
-Automated Report Generation: Generates structured research reports using OpenAI and LangChain.
+| Component | Responsibility |
+|---|---|
+| Search Agent | Searches the web using Tavily |
+| Reader Agent | Extracts useful content from webpages |
+| Writer Chain | Generates a structured research report |
+| Critic Chain | Evaluates the report and provides feedback |
 
-AI-Based Evaluation: A Critic chain reviews generated reports, providing scores, strengths, and improvement suggestions.
+## 🔄 Workflow
 
-Interactive Dashboard: Streamlit interface with pipeline status tracking and report previews.
+```text
+             User Research Topic
+                      |
+                      v
+                Search Agent
+                      |
+                      v
+              Tavily Web Search
+                      |
+                      v
+                Reader Agent
+                      |
+                      v
+             Webpage Scraping
+                      |
+                      v
+                 Writer Chain
+                      |
+                      v
+              Research Report
+                      |
+                      v
+                 Critic Chain
+                      |
+                      v
+             Evaluation Feedback
+                      |
+                      v
+               Final Output
+```
 
-Report Download: Export generated research reports in Markdown format.
+## 📸 Application Screenshot
 
-🏗️ System Architecture
+### ResearchMind Dashboard
 
-ResearchMind follows a sequential four-stage research pipeline:
+![ResearchMind Dashboard](screenshots/researchmind-ui.png)
 
-Search Agent: Searches the web using the Tavily API and retrieves relevant URLs, titles, and snippets.
+## 🛠️ Tech Stack
 
-Reader Agent: Selects a relevant webpage and extracts its content using BeautifulSoup.
+- **Language:** Python
+- **LLM Framework:** LangChain
+- **LLM:** OpenAI GPT-4o-mini
+- **Web Search:** Tavily API
+- **Web Scraping:** Requests, BeautifulSoup
+- **Frontend:** Streamlit
+- **Environment Management:** python-dotenv
 
-Writer Chain: Processes the research information and generates a structured Markdown report.
+## 📁 Project Structure
 
-Critic Chain: Evaluates the generated report and provides a quality score, strengths, and improvement suggestions.
-
-          User Research Topic
-                  |
-                  v
-          +---------------+
-          | Search Agent  |
-          |  Tavily API   |
-          +---------------+
-                  |
-                  v
-          +---------------+
-          | Reader Agent  |
-          | BeautifulSoup |
-          +---------------+
-                  |
-                  v
-          +---------------+
-          | Writer Chain  |
-          |   OpenAI LLM  |
-          +---------------+
-                  |
-                  v
-          +---------------+
-          | Critic Chain  |
-          |   Evaluation  |
-          +---------------+
-                  |
-                  v
-          Structured Research Report
-
-🛠️ Tech Stack
-
-Category
-
-Technologies
-
-Programming Language
-
-Python
-
-AI Framework
-
-LangChain
-
-LLM
-
-OpenAI (gpt-4o-mini)
-
-Agent Architecture
-
-LangChain create_agent()
-
-Prompt Pipelines
-
-LangChain Expression Language (LCEL)
-
-Web Search
-
-Tavily API
-
-Web Scraping
-
-Requests, BeautifulSoup
-
-Frontend
-
-Streamlit
-
-Environment Management
-
-python-dotenv
-
-📂 Project Structure
-
+```text
 ResearchMind/
 │
-├── agents.py          # Search Agent, Reader Agent,
-│                      # Writer Chain and Critic Chain
-│
+├── agents.py          # Search and Reader agents
 ├── tools.py           # Web search and scraping tools
-│
 ├── pipeline.py        # Sequential research pipeline
-│
-├── app.py             # Streamlit web application
-│
+├── app.py             # Streamlit application
 ├── requirements.txt   # Project dependencies
+├── .gitignore         # Ignored files and folders
+├── README.md          # Project documentation
 │
-├── .gitignore         # Excluded files and secrets
-│
-└── README.md          # Project documentation
+└── screenshots/
+    └── researchmind-ui.png
+```
 
-⚙️ Installation & Setup
+## ⚙️ Installation & Setup
 
-1. Clone the Repository
+### 1. Clone the repository
 
+```bash
 git clone https://github.com/Anurag123731/ResearchMind.git
 cd ResearchMind
+```
 
-2. Create a Virtual Environment
+### 2. Create a virtual environment
 
+```bash
 python -m venv .venv
+```
 
-Activate it on Windows:
+### 3. Activate the virtual environment
 
+**Windows:**
+
+```bash
 .venv\Scripts\activate
+```
 
-3. Install Dependencies
+### 4. Install dependencies
 
+```bash
 pip install -r requirements.txt
+```
 
-4. Configure Environment Variables
+### 5. Configure environment variables
 
-Create a .env file in the root directory and add your API keys:
+Create a `.env` file in the project root directory and add your API keys:
 
+```env
 OPENAI_API_KEY=your_openai_api_key
 TAVILY_API_KEY=your_tavily_api_key
+```
 
-Note: Never share or commit your .env file or API keys to GitHub.
+### 6. Run the application
 
-5. Run the Application
-
-Launch the Streamlit interface:
-
+```bash
 streamlit run app.py
+```
 
-The application will open in your browser.
+## 📄 Research Report Output
 
-To run the research pipeline directly from the terminal:
+ResearchMind generates structured Markdown research reports containing:
 
-python pipeline.py
+- Introduction
+- Key Findings
+- Conclusion
+- Sources
 
-📊 Research Report Output
+The Critic Chain additionally provides:
 
-ResearchMind generates structured reports containing:
+- Evaluation Score
+- Strengths
+- Areas to Improve
+- Final Verdict
 
-Introduction
+## 🔮 Future Improvements
 
-Key Findings
+- Implement iterative research and report refinement using LangGraph.
+- Add parallel webpage scraping for faster research.
+- Improve report evaluation and source verification.
+- Support exporting reports in PDF format.
 
-Conclusion
+## 👨‍💻 Author
 
-Sources
+**Anurag Rawat**
 
-The Critic Chain additionally evaluates the generated report based on its quality and provides:
-
-Overall Score (out of 10)
-
-Strengths
-
-Areas to Improve
-
-Final Verdict
-
-🔮 Future Improvements
-
-Implement iterative report refinement using LangGraph.
-
-Enable parallel scraping of multiple webpages.
-
-Improve source verification and citation accuracy.
-
-Add support for exporting reports as PDF.
-
-Introduce additional specialized research agents.
-
-👨‍💻 Author
-
-Anurag Rawat
-
-GitHub: Anurag123731
-
-⭐ If you find this project interesting, consider giving the repository a star!
+- GitHub: [Anurag123731](https://github.com/Anurag123731)
+- Repository: [ResearchMind](https://github.com/Anurag123731/ResearchMind)
